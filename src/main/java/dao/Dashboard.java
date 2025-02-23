@@ -58,7 +58,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnEstudiantes = new javax.swing.JButton();
         btnTrabajadores = new javax.swing.JButton();
         btnSalidas = new javax.swing.JButton();
-        btnIngresos = new javax.swing.JButton();
+        btnAsistencias = new javax.swing.JButton();
         header = new javax.swing.JPanel();
         navText = new javax.swing.JLabel();
         dateText = new javax.swing.JLabel();
@@ -134,14 +134,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnIngresos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnIngresos.setText("Ingresos");
-        btnIngresos.setBorder(null);
-        btnIngresos.setBorderPainted(false);
-        btnIngresos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnIngresos.addActionListener(new java.awt.event.ActionListener() {
+        btnAsistencias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAsistencias.setText("Asistencias");
+        btnAsistencias.setBorder(null);
+        btnAsistencias.setBorderPainted(false);
+        btnAsistencias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresosActionPerformed(evt);
+                btnAsistenciasActionPerformed(evt);
             }
         });
 
@@ -167,7 +167,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSalidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                            .addComponent(btnIngresos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnAsistencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         menuLayout.setVerticalGroup(
@@ -180,7 +180,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -286,16 +286,12 @@ public class Dashboard extends javax.swing.JFrame {
         mostrarJPanel(new PrincipalFrm());
     }//GEN-LAST:event_btnInicioActionPerformed
 
-    private void btnIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresosActionPerformed
-        mostrarJPanel(new IngresosFrm());
-    }//GEN-LAST:event_btnIngresosActionPerformed
-
-    private void btnSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidasActionPerformed
-        mostrarJPanel(new SalidasFrm());
-    }//GEN-LAST:event_btnSalidasActionPerformed
+    private void btnAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsistenciasActionPerformed
+        mostrarJPanel(new AsistenciaFrm());
+    }//GEN-LAST:event_btnAsistenciasActionPerformed
 
     private void btnEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudiantesActionPerformed
-        mostrarJPanel(new Estudiantes());
+        mostrarJPanel(new Reportes());
     }//GEN-LAST:event_btnEstudiantesActionPerformed
 
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
@@ -305,6 +301,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         mostrarJPanel(new ReportesFrm());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidasActionPerformed
+        mostrarJPanel(new SalidasFrm());
+    }//GEN-LAST:event_btnSalidasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,8 +323,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appName;
+    private javax.swing.JButton btnAsistencias;
     private javax.swing.JButton btnEstudiantes;
-    private javax.swing.JButton btnIngresos;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnSalidas;
     private javax.swing.JButton btnTrabajadores;

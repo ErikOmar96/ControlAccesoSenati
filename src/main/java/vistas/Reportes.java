@@ -1,8 +1,9 @@
 package vistas;
 
-import dao.DAOEstudiantesImpl;
+// import dao.DAOEstudiantesImpl;
 import dao.Dashboard;
-import interfaces.DAOEstudiantes;
+// import interfaces.DAOEstudiantes;
+import dao.AsistenciaDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,15 +12,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Erick Vergara Lopez <your.name at your.org>
  */
-public class Estudiantes extends javax.swing.JPanel {
+public class Reportes extends javax.swing.JPanel {
 
     /**
      * Creates new form EstudiantesFrm
      */
-    public Estudiantes() {
+    public Reportes() {
         initComponents();
         iniciarEstilos();
-        cargarEstudiantes();
+        // cargarEstudiantes();
+        cargarAsistencias();
     }
 
     /**
@@ -36,7 +38,7 @@ public class Estudiantes extends javax.swing.JPanel {
         txtBuscar = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEstudiantes = new javax.swing.JTable();
+        tablaAsistencias = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
@@ -52,16 +54,16 @@ public class Estudiantes extends javax.swing.JPanel {
             }
         });
 
-        tablaEstudiantes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        tablaEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAsistencias.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        tablaAsistencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id_estudiante", "nombre", "carrera", "semestre"
+                "id", "fecha", "hora", "tipo", "usuario_id"
             }
         ));
-        jScrollPane1.setViewportView(tablaEstudiantes);
+        jScrollPane1.setViewportView(tablaAsistencias);
 
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEditar.setText("Editar");
@@ -146,21 +148,22 @@ public class Estudiantes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Dashboard.mostrarJPanel(new EstudiantesFrm());
+        Dashboard.mostrarJPanel(new AsistenciaFrm());
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // Instancia de DAOEstudiantes
-        DAOEstudiantes dao = new DAOEstudiantesImpl();
+        // DAOEstudiantes dao = new DAOEstudiantesImpl();
+        AsistenciaDAO dao = new AsistenciaDAO();
         // Establecer un DefaultTableModel
-        DefaultTableModel modelo = (DefaultTableModel) tablaEstudiantes.getModel();
-        if (tablaEstudiantes.getSelectedRows().length < 1) {
+        DefaultTableModel modelo = (DefaultTableModel) tablaAsistencias.getModel();
+        if (tablaAsistencias.getSelectedRows().length < 1) {
             JOptionPane.showMessageDialog(this, "Debes seleccionar 1 o más estudiantes a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            for (int i : tablaEstudiantes.getSelectedRows()) {
+            for (int i : tablaAsistencias.getSelectedRows()) {
                 try {
                     // Llamamos al metodo eliminar y pasamos como parametro el id de la fila de seleccionada de la tabla
-                    dao.eliminar((int) tablaEstudiantes.getValueAt(i, 0));
+                    dao.eliminarAsistencia((int) tablaAsistencias.getValueAt(i, 0));
                     // Eliminar fila del modelo
                     modelo.removeRow(i);
                 } catch (Exception ex) {
@@ -171,12 +174,13 @@ public class Estudiantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tablaEstudiantes.getSelectedRow() > -1) {
+        if (tablaAsistencias.getSelectedRow() > -1) {
             try {
                 // Obtener el idEstudiante
-                int idEstudiante = (int) tablaEstudiantes.getValueAt(tablaEstudiantes.getSelectedRow(), 0);
-                DAOEstudiantes dao = new DAOEstudiantesImpl();
-                Dashboard.mostrarJPanel(new EstudiantesFrm(dao.getEstudianteById(idEstudiante)));
+                int idUsuario = (int) tablaAsistencias.getValueAt(tablaAsistencias.getSelectedRow(), 0);
+                // DAOEstudiantes dao = new DAOEstudiantesImpl();
+                AsistenciaDAO dao = new AsistenciaDAO();
+                Dashboard.mostrarJPanel(new AsistenciaFrm(dao.obtenerAsistenciaPorId(idUsuario)));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -189,19 +193,21 @@ public class Estudiantes extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             // Valor de textField de buscar
-            String estudianteBuscar = txtBuscar.getText();
+            String usuarioBuscar = txtBuscar.getText();
             // Instancia de DAOEstudiantes         
-            DAOEstudiantes dao = new DAOEstudiantesImpl();
+            // DAOEstudiantes dao = new DAOEstudiantesImpl();
+            AsistenciaDAO dao = new AsistenciaDAO();
             // Establecer un DefaultTableModel
-            DefaultTableModel modelo = (DefaultTableModel) tablaEstudiantes.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) tablaAsistencias.getModel();
             // Limpiar
             modelo.setRowCount(0);
             // Agregar la fila al modelo por cada registro que tenga la tabla estudiante
-            dao.listar(estudianteBuscar).forEach((estudiante) -> modelo.addRow(new Object[]{
-                estudiante.getIdEstudiante(),
-                estudiante.getNombre(),
-                estudiante.getCarrera(),
-                estudiante.getSemestre()
+            dao.listar(usuarioBuscar).forEach((asistencia) -> modelo.addRow(new Object[]{
+                asistencia.getId(),
+                asistencia.getFecha(),
+                asistencia.getHora(),
+                asistencia.getTipo(),
+                asistencia.getUsuarioId()
             }));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -216,7 +222,7 @@ public class Estudiantes extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaEstudiantes;
+    private javax.swing.JTable tablaAsistencias;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
@@ -228,19 +234,35 @@ public class Estudiantes extends javax.swing.JPanel {
     }
 
     // Cargar lista de estudiantes
-    private void cargarEstudiantes() {
+//    private void cargarEstudiantes() {
+//        try {
+//            DAOEstudiantes dao = new DAOEstudiantesImpl();
+//            // Establecer un DefaultTableModel
+//            DefaultTableModel modelo = (DefaultTableModel) tablaAsistencias.getModel();
+//            // Agregar la fila al modelo por cada registro que tenga la tabla estudiante
+//            dao.listar("").forEach((estudiante) -> modelo.addRow(new Object[]{
+//                estudiante.getIdEstudiante(),
+//                estudiante.getNombre(),
+//                estudiante.getCarrera(),
+//                estudiante.getSemestre()
+//            }));
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    }
+    
+    private void cargarAsistencias() {
         try {
-            DAOEstudiantes dao = new DAOEstudiantesImpl();
-            // Establecer un DefaultTableModel
-            DefaultTableModel modelo = (DefaultTableModel) tablaEstudiantes.getModel();
-            // Agregar la fila al modelo por cada registro que tenga la tabla estudiante
-            dao.listar("").forEach((estudiante) -> modelo.addRow(new Object[]{
-                estudiante.getIdEstudiante(),
-                estudiante.getNombre(),
-                estudiante.getCarrera(),
-                estudiante.getSemestre()
+            AsistenciaDAO dao = new AsistenciaDAO();
+            DefaultTableModel modelo = (DefaultTableModel) tablaAsistencias.getModel();
+            dao.listar("").forEach((asistencia) -> modelo.addRow(new Object[]{
+                asistencia.getId(),
+                asistencia.getFecha(),
+                asistencia.getHora(),
+                asistencia.getTipo(),
+                asistencia.getUsuarioId()
             }));
-        } catch (Exception ex) {
+        } catch (Exception ex){
             System.out.println(ex.getMessage());
         }
     }

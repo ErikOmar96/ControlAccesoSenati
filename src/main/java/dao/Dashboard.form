@@ -115,7 +115,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnSalidas" max="32767" attributes="0"/>
                                   <Component id="jButton1" alignment="1" pref="258" max="32767" attributes="0"/>
-                                  <Component id="btnIngresos" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnAsistencias" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -133,7 +133,7 @@
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="btnInicio" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnIngresos" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="btnAsistencias" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSalidas" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -254,12 +254,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalidasActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnIngresos">
+            <Component class="javax.swing.JButton" name="btnAsistencias">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ingresos"/>
+                <Property name="text" type="java.lang.String" value="Asistencias"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -269,7 +269,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenciasActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
